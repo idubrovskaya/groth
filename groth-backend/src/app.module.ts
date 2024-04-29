@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './app/user/user.module';
 import { UserController } from './app/user/user.controller';
 import { UserService } from './app/user/user.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -10,6 +9,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 // ========== config ==========
 import app_config from './config/app.config';
 import db_config from './config/database.config';
+import { User } from './app/user/models/user.model';
+import { UserModule } from './app/user/user.module';
 
 @Module({
   imports: [
@@ -29,12 +30,12 @@ import db_config from './config/database.config';
         database: config.get('dbName'),
         synchronize: true,
         autoLoadModels: true,
-        models: [],
+        models: [User],
       }),
     }),
     UserModule,
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
