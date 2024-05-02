@@ -11,6 +11,8 @@ import app_config from './config/app.config';
 import db_config from './config/database.config';
 import { User } from './app/user/models/user.model';
 import { UserModule } from './app/user/user.module';
+import { AuthModule } from './app/auth/auth.module';
+import { SecurityModule } from './app/security/security.module';
 
 @Module({
   imports: [
@@ -34,6 +36,8 @@ import { UserModule } from './app/user/user.module';
       }),
     }),
     UserModule,
+    AuthModule,
+    SecurityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
