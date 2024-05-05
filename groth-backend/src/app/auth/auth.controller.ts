@@ -21,13 +21,9 @@ export class AuthController {
   @ApiTags('API')
   @ApiResponse({ status: 200, type: AuthUserResponse })
   @Post('sign-in')
-  signIn(@Body() dto: UserSignInForm): Promise<AuthUserResponse> {
+  signIn(@Body() dto: UserSignInForm): Promise<any> {
     return this.authService.signIn(dto);
   }
 
-  @UseGuards(JwtPermissionsGuard)
-  @Post('test')
-  test() {
-    return true;
-  }
+
 }
