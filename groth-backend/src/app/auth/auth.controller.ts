@@ -21,9 +21,7 @@ export class AuthController {
   @ApiTags('API')
   @ApiResponse({ status: 200, type: AuthUserResponse })
   @Post('sign-in')
-  signIn(@Body() dto: UserSignInForm): Promise<any> {
+  signIn(@Body() dto: UserSignInForm): Promise<AuthUserResponse> {
     return this.authService.signIn(dto);
   }
-
-
 }
