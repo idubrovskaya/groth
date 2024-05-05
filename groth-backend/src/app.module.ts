@@ -13,6 +13,8 @@ import { User } from './app/user/models/user.model';
 import { UserModule } from './app/user/user.module';
 import { AuthModule } from './app/auth/auth.module';
 import { SecurityModule } from './app/security/security.module';
+import { WatchlistModule } from './app/watchlist/watchlist.module';
+import { WatchList } from './app/watchlist/models/watchlist.model';
 
 @Module({
   imports: [
@@ -32,12 +34,13 @@ import { SecurityModule } from './app/security/security.module';
         database: config.get('dbName'),
         synchronize: true,
         autoLoadModels: true,
-        models: [User],
+        models: [User, WatchList],
       }),
     }),
     UserModule,
     AuthModule,
     SecurityModule,
+    WatchlistModule,
   ],
   controllers: [AppController],
   providers: [AppService],
