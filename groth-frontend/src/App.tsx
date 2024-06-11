@@ -6,6 +6,9 @@ import { ColorModeContext, useMode } from './assets/theme';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { LayoutComponent } from './app/components/layout/layout';
+import { NewsComponent } from './app/components/news/news';
+import { SettingsComponents } from './app/components/settings/settings';
+import { Watchlist } from './app/components/watchlist/watchlist';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -18,6 +21,9 @@ function App() {
             <Routes>
               <Route element={<PrivateRouter />}>
                 <Route path='/' element={<Home />} />
+                <Route path='/news' element={<NewsComponent />} />
+                <Route path='/settings' element={<SettingsComponents />} />
+                <Route path='/watchlist' element={<Watchlist />} />
               </Route>
               <Route path='sign-in' element={<AuthRootComponent />} />
               <Route path='sign-up' element={<AuthRootComponent />} />
