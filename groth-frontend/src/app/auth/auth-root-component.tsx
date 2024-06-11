@@ -8,6 +8,7 @@ import { instance } from '../../utils/axios';
 import { useAppDispatch } from '../../store';
 import { signIn } from './store/auth.slice';
 import { AppErrorsEnum } from '../../common/types/errors/errors';
+import { useForm } from 'react-hook-form';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -19,16 +20,23 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  console.log('errors-rhf', errors);
+
   const location = useLocation();
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-
+  const handleSubmitForm = async (data: any) => {
+    console.log(data, 'data');
     if (location.pathname === '/sign-in') {
       try {
         const userData = {
-          email,
-          password,
+          email: data.email,
+          password: data.password,
         };
 
         const user = await instance.post('auth/sign-in', userData);
@@ -50,7 +58,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
           await dispatch(signIn(newUser.data));
           navigate('/');
         } catch (error) {
-          console.log(e);
+          console.log(error);
           return error;
         }
       } else {
@@ -61,7 +69,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
 
   return (
     <div className='root'>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit(handleSubmitForm)}>
         <Box
           display='flex'
           alignItems='center'
@@ -75,8 +83,8 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
         >
           {location.pathname === '/sign-in' ? (
             <SignInPage
-              setEmail={setEmail}
-              setPassword={setPassword}
+              register={register}
+              errors={errors}
               navigate={navigate}
             />
           ) : location.pathname === '/sign-up' ? (

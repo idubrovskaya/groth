@@ -4,7 +4,7 @@ import { IPropsSignIn } from '../../common/types/auth';
 export const SignInPage: React.FC<IPropsSignIn> = (
   props: IPropsSignIn
 ): JSX.Element => {
-  const { setEmail, setPassword, navigate } = props;
+  const { register, navigate, errors } = props;
   return (
     <>
       <Typography
@@ -29,22 +29,29 @@ export const SignInPage: React.FC<IPropsSignIn> = (
         <TextField
           margin='normal'
           fullWidth
-          required
+          error={!!errors.email}
+          helperText={errors.email ? `${errors.email.message}` : ''}
+          // required
           autoFocus
           label='Email'
           variant='outlined'
           placeholder='Enter your email'
-          onChange={(e) => setEmail(e.target.value)}
+          {...register('email', { required: 'Required field! Enter email' })}
         />
         <TextField
           margin='normal'
-          required
+          // required
           fullWidth
+          error={!!errors.password}
+          helperText={errors.password ? `${errors.password.message}` : ''}
           type='password'
           label='Password'
           variant='outlined'
           placeholder='Enter your password'
-          onChange={(e) => setPassword(e.target.value)}
+          {...register('password', {
+            required: 'Required field! Enter password',
+            minLength: 6,
+          })}
         />
       </Box>
       <Button
