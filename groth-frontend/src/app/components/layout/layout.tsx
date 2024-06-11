@@ -1,17 +1,18 @@
 import { Box, useMediaQuery } from '@mui/material';
-import { ILayout } from '../../../common/types/layout';
-import { TopBarComponent } from '../topbar/topbar';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from '../sidebar/sidebar';
 import { useState } from 'react';
+import { TopBarComponent } from '../topbar/topbar';
 
-export const LayoutComponent = ({ children }: ILayout) => {
-  const [isOpen, setIsOpen] = useState(true);
+export const LayoutComponent = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:600px)');
   return location.pathname === '/sign-in' ||
     location.pathname === '/sign-up' ? (
-    <> {children}</>
+    <>
+      <Outlet />
+    </>
   ) : (
     <Box
       display={matches ? 'flex' : 'block'}
@@ -21,7 +22,7 @@ export const LayoutComponent = ({ children }: ILayout) => {
     >
       <Sidebar
         matches={matches}
-        drawerWidth='250'
+        drawerWidth='200px'
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
@@ -30,11 +31,11 @@ export const LayoutComponent = ({ children }: ILayout) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          width: '90%',
+          flexGrow: 1,
         }}
       >
-        <TopBarComponent />
-        {children}
+        <TopBarComponent isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Outlet />
       </Box>
     </Box>
   );

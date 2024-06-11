@@ -21,7 +21,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { navMenu } from '../../../common/moks/navigate';
 import { tokens } from '../../../assets/theme';
 import Logo from '../../../assets/images/logo-groth.svg';
-import { useStyles } from './styles';
 
 const FlexBetween = styled(Box)({
   display: 'flex',
@@ -37,7 +36,6 @@ export const Sidebar = (props: any) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const classes = useStyles();
 
   useEffect(() => {
     setIsActive(pathname.substring(1));
@@ -62,15 +60,24 @@ export const Sidebar = (props: any) => {
           }}
         >
           <Box
-            className={classes.navBlock}
-            sx={{ borderBottom: `1px solid ${colors.borderColor}` }}
+            sx={{
+              borderBottom: `1px solid ${colors.borderColor}`,
+              width: '100%',
+            }}
           >
             <Box>
               <FlexBetween>
-                <Box className={classes.brand}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '30px 15px',
+                    cursor: 'pointer',
+                  }}
+                >
                   <img src={Logo} alt='logo' />
                   <Typography
-                    className={classes.brandTitle}
                     variant='h1'
                     color={
                       theme.palette.mode === 'dark'
@@ -88,13 +95,22 @@ export const Sidebar = (props: any) => {
                 )}
               </FlexBetween>
             </Box>
-            <List className={classes.navList}>
+            <List sx={{ marginBottom: '55px' }}>
               {navMenu.map((el): JSX.Element => {
                 return (
                   <ListItem key={el.id}>
                     <ListItemButton
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: '#1900d5 !important',
+                          color: '#fff',
+                          borderRadius: '4px',
+                          '& .MuiSvgIcon-root': {
+                            color: `${colors.white.DEFAULT} !important`,
+                          },
+                        },
+                      }}
                       onClick={() => navigate(`${el.path}`)}
-                      className={classes.navItem}
                     >
                       <ListItemIcon> {el.icon}</ListItemIcon>
                       <Typography variant='body1'>{el.name}</Typography>
@@ -107,7 +123,18 @@ export const Sidebar = (props: any) => {
           <Box width='100%'>
             <List>
               <ListItem>
-                <ListItemButton className={classes.navItem}>
+                <ListItemButton
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: '#1900d5 !important',
+                      color: '#fff',
+                      borderRadius: '4px',
+                      '& .MuiSvgIcon-root': {
+                        color: `${colors.white.DEFAULT} !important`,
+                      },
+                    },
+                  }}
+                >
                   <ListItemIcon>
                     <LogoutOutlined />
                   </ListItemIcon>
