@@ -3,35 +3,31 @@ import { SignInPage } from './sign-in';
 import { SignUpPage } from './sign-up';
 import '../../assets/style.scss';
 import { Box } from '@mui/material';
-import { useState } from 'react';
 import { instance } from '../../utils/axios';
 import { useAppDispatch } from '../../store';
 import { signIn } from './store/auth.slice';
 import { AppErrorsEnum } from '../../common/types/errors/errors';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { signInSchema, signUpSchema } from '../../utils/yup/yup';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [userName, setUserName] = useState('');
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
-
-  console.log('errors-rhf', errors);
-
-  const location = useLocation();
+  } = useForm({
+    mode: 'onSubmit',
+    resolver: yupResolver(
+      location.pathname === '/sign-in' ? signInSchema : signUpSchema
+    ),
+  });
 
   const handleSubmitForm = async (data: any) => {
-    console.log(data, 'data');
     if (location.pathname === '/sign-in') {
       try {
         const userData = {
@@ -46,13 +42,13 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
         return error;
       }
     } else {
-      if (password === repeatPassword) {
+      if (data.password === data.confirmPassword) {
         try {
           const userData = {
-            firstName,
-            userName,
-            email,
-            password,
+            firstName: data.name,
+            userName: data.username,
+            email: data.email,
+            password: data.password,
           };
           const newUser = await instance.post('auth/sign-up', userData);
           await dispatch(signIn(newUser.data));
@@ -89,12 +85,9 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
             />
           ) : location.pathname === '/sign-up' ? (
             <SignUpPage
-              setEmail={setEmail}
-              setPassword={setPassword}
-              setRepeatPassword={setRepeatPassword}
-              setFirstName={setFirstName}
-              setUserName={setUserName}
               navigate={navigate}
+              register={register}
+              errors={errors}
             />
           ) : null}
         </Box>

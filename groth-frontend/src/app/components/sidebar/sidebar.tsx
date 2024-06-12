@@ -15,18 +15,11 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import { styled } from '@mui/styles';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { navMenu } from '../../../common/moks/navigate';
 import { tokens } from '../../../assets/theme';
 import Logo from '../../../assets/images/logo-groth.svg';
-
-const FlexBetween = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-});
 
 export const Sidebar = (props: any) => {
   const { matches, drawerWidth, isOpen, setIsOpen } = props;
@@ -66,7 +59,13 @@ export const Sidebar = (props: any) => {
             }}
           >
             <Box>
-              <FlexBetween>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
                 <Box
                   sx={{
                     display: 'flex',
@@ -93,7 +92,7 @@ export const Sidebar = (props: any) => {
                     <ChevronLeftOutlined />
                   </IconButton>
                 )}
-              </FlexBetween>
+              </Box>
             </Box>
             <List sx={{ marginBottom: '55px' }}>
               {navMenu.map((el): JSX.Element => {
