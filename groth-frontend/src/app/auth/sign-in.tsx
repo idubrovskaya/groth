@@ -36,7 +36,7 @@ export const SignInPage: React.FC<IPropsSignIn> = (
           label='Email'
           variant='outlined'
           placeholder='Enter your email'
-          {...register('email', { required: 'Required field! Enter email' })}
+          {...register('email')}
         />
         <TextField
           margin='normal'
@@ -48,10 +48,7 @@ export const SignInPage: React.FC<IPropsSignIn> = (
           label='Password'
           variant='outlined'
           placeholder='Enter your password'
-          {...register('password', {
-            required: 'Required field! Enter password',
-            minLength: 6,
-          })}
+          {...register('password')}
         />
       </Box>
       <Button

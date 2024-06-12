@@ -5,14 +5,7 @@ import { IPropsSignUp } from '../../common/types/auth';
 export const SignUpPage: React.FC<IPropsSignUp> = (
   props: IPropsSignUp
 ): JSX.Element => {
-  const {
-    setEmail,
-    setPassword,
-    setRepeatPassword,
-    setFirstName,
-    setUserName,
-    navigate,
-  } = props;
+  const { register, navigate, errors } = props;
   return (
     <>
       <Typography
@@ -37,52 +30,64 @@ export const SignUpPage: React.FC<IPropsSignUp> = (
         <TextField
           margin='normal'
           fullWidth
-          required
+          // required
           autoFocus
           label='Name'
           variant='outlined'
           placeholder='Enter your name'
-          onChange={(event) => setFirstName(event.target.value)}
+          helperText={errors.name ? `${errors.name.message}` : ''}
+          error={!!errors.email}
+          {...register('name')}
         />
         <TextField
           margin='normal'
           fullWidth
-          required
+          // required
           autoFocus
           label='Username'
           variant='outlined'
           placeholder='Enter your username'
-          onChange={(event) => setUserName(event.target.value)}
+          helperText={errors.username ? `${errors.username.message}` : ''}
+          error={!!errors.email}
+          {...register('username')}
         />
         <TextField
           margin='normal'
           fullWidth
-          required
+          // required
           autoFocus
           label='Email'
           variant='outlined'
           placeholder='Enter your email'
-          onChange={(event) => setEmail(event.target.value)}
+          helperText={errors.email ? `${errors.email.message}` : ''}
+          error={!!errors.email}
+          {...register('email')}
         />
         <TextField
           margin='normal'
-          required
+          // required
           fullWidth
           type='password'
           label='Password'
           variant='outlined'
           placeholder='Enter your password'
-          onChange={(event) => setPassword(event.target.value)}
+          helperText={errors.password ? `${errors.password.message}` : ''}
+          error={!!errors.email}
+          {...register('password')}
         />
         <TextField
           margin='normal'
-          required
+          // required
           fullWidth
           type='password'
           label='Password'
           variant='outlined'
           placeholder='Confirm your password'
-          onChange={(event) => setRepeatPassword(event.target.value)}
+          helperText={
+            errors.confirmPassword ? `${errors.confirmPassword.message}` : ''
+          }
+          error={!!errors.email}
+          {...register('confirmPassword')}
         />
       </Box>
       <Button

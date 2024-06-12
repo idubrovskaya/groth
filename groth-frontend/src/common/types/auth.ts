@@ -9,13 +9,13 @@ export interface IPropsSignIn<
   navigate: (to: string) => void;
 }
 
-export interface IPropsSignUp {
-  setPassword: (value: string) => void;
-  setEmail: (value: string) => void;
-  setRepeatPassword: (value: string) => void;
-  setFirstName: (value: string) => void;
-  setUserName: (value: string) => void;
+export interface IPropsSignUp<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = any
+> {
   navigate: (to: string) => void;
+  register: UseFormRegister<TFieldValues>;
+  errors: FieldErrors<TFieldValues>;
 }
 
 export interface IWatchList {
