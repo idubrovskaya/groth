@@ -1,14 +1,14 @@
-import { Home } from './app/components/home/home-page';
+import { Home } from './pages/home/home-page';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRouter } from './app.routes';
-import { AuthRootComponent } from './app/auth/auth-root-component';
+import { AuthRootComponent } from './components/auth/auth-root-component';
 import { ColorModeContext, useMode } from './assets/theme';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
-import { LayoutComponent } from './app/components/layout/layout';
-import { NewsComponent } from './app/components/news/news';
-import { SettingsComponents } from './app/components/settings/settings';
-import { Watchlist } from './app/components/watchlist/watchlist';
+import { LayoutComponent } from './components/layout/layout';
+import { NewsComponent } from './pages/news/news';
+import { SettingsComponents } from './pages/settings/settings';
+import { Watchlist } from './pages/watchlist/watchlist';
 
 function App() {
   const [theme, colorMode] = useMode();

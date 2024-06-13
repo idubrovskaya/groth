@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { IPropsSignIn } from '../../common/types/auth';
+import { IPropsSignIn } from '../../core/types/auth';
+import { AppButton } from '../ui/button';
 
 export const SignInPage: React.FC<IPropsSignIn> = (
   props: IPropsSignIn
@@ -7,22 +8,11 @@ export const SignInPage: React.FC<IPropsSignIn> = (
   const { register, navigate, errors } = props;
   return (
     <>
-      <Typography
-        component='h1'
-        variant='h5'
-        textAlign={'center'}
-        fontFamily={'Poppins'}
-        padding={2}
-      >
+      <Typography variant='h5' textAlign={'center'} padding={2}>
         Sign in
       </Typography>
 
-      <Typography
-        variant='body1'
-        fontFamily={'Poppins'}
-        textAlign={'center'}
-        marginBottom={3}
-      >
+      <Typography variant='body1' textAlign={'center'} marginBottom={3}>
         Enter your login and password
       </Typography>
       <Box>
@@ -51,17 +41,18 @@ export const SignInPage: React.FC<IPropsSignIn> = (
           {...register('password')}
         />
       </Box>
-      <Button
-        sx={{ fontFamily: 'Poppins', m: 2, width: '60%' }}
-        variant='contained'
-        type='submit'
-      >
+      <AppButton variant='contained' type='submit'>
         Sign in
-      </Button>
+      </AppButton>
 
       <Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
         Don't have an account?
-        <span onClick={() => navigate('/sign-up')}>Sign up</span>
+        <span
+          onClick={() => navigate('/sign-up')}
+          style={{ color: '#1900D5', marginLeft: '10px', cursor: 'pointer' }}
+        >
+          Sign up
+        </span>
       </Typography>
     </>
   );

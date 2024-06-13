@@ -1,6 +1,7 @@
 import { Typography, Box, TextField, Button } from '@mui/material';
 import React from 'react';
-import { IPropsSignUp } from '../../common/types/auth';
+import { IPropsSignUp } from '../../core/types/auth';
+import { AppButton } from '../ui/button';
 
 export const SignUpPage: React.FC<IPropsSignUp> = (
   props: IPropsSignUp
@@ -90,17 +91,18 @@ export const SignUpPage: React.FC<IPropsSignUp> = (
           {...register('confirmPassword')}
         />
       </Box>
-      <Button
-        sx={{ fontFamily: 'Poppins', m: 2, width: '60%' }}
-        variant='contained'
-        type='submit'
-      >
+      <AppButton variant='contained' type='submit'>
         Sign up
-      </Button>
+      </AppButton>
 
       <Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
         Do you have an account?
-        <span onClick={() => navigate('/sign-in')}> Sign in</span>
+        <span
+          onClick={() => navigate('/sign-in')}
+          style={{ color: '#1900D5', marginLeft: '10px', cursor: 'pointer' }}
+        >
+          Sign in
+        </span>
       </Typography>
     </>
   );

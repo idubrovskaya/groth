@@ -4,7 +4,7 @@ import { Sidebar } from '../sidebar/sidebar';
 import { useState } from 'react';
 import { TopBarComponent } from '../topbar/topbar';
 
-export const LayoutComponent = () => {
+export const LayoutComponent: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:600px)');
