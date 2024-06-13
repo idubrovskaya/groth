@@ -9,7 +9,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { useContext } from 'react';
-import { useAppSelector } from '../../auth/store/auth.selector';
+import { useAppSelector } from '../../core/store/auth/auth.selector';
 import {
   NotificationsNoneOutlined,
   Search,
@@ -17,9 +17,12 @@ import {
   LightMode,
   MenuOutlined,
 } from '@mui/icons-material';
-import { ColorModeContext, tokens } from '../../../assets/theme';
+import { ColorModeContext, tokens } from '../../assets/theme';
+import { ITopbarProps } from '../../core/types/topbar';
 
-export const TopBarComponent = (props: any) => {
+export const TopBarComponent: React.FC<ITopbarProps> = (
+  props: ITopbarProps
+): JSX.Element => {
   const { isOpen, setIsOpen } = props;
   const { firstName } = useAppSelector((state) => state.auth.user);
   console.log('user', firstName);

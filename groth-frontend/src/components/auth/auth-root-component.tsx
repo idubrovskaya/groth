@@ -1,15 +1,14 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SignInPage } from './sign-in';
 import { SignUpPage } from './sign-up';
-import '../../assets/style.scss';
-import { Box } from '@mui/material';
-import { instance } from '../../utils/axios';
-import { useAppDispatch } from '../../store';
-import { signIn } from './store/auth.slice';
-import { AppErrorsEnum } from '../../common/types/errors/errors';
+import { Box, FormControl } from '@mui/material';
+import { instance } from '../../core/api';
+import { useAppDispatch } from '../../core/store/store';
+import { signIn } from '../../core/store/auth/auth.slice';
+import { AppErrorsEnum } from '../../core/constants/errors';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signInSchema, signUpSchema } from '../../utils/yup/yup';
+import { signInSchema, signUpSchema } from '../../core/schemes/yup';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -64,8 +63,21 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div className='root'>
-      <form className='form' onSubmit={handleSubmit(handleSubmitForm)}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px',
+        width: '100vw',
+        height: '100vh',
+      }}
+    >
+      <FormControl
+        component={'form'}
+        sx={{ flex: 1 }}
+        onSubmit={handleSubmit(handleSubmitForm)}
+      >
         <Box
           display='flex'
           alignItems='center'
@@ -75,7 +87,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
           margin={'auto'}
           padding={5}
           borderRadius={5}
-          boxShadow={'5px 5px 10px #ccc'}
+          boxShadow={'-3px -2px 20px 1px #202020'}
         >
           {location.pathname === '/sign-in' ? (
             <SignInPage
@@ -91,7 +103,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
             />
           ) : null}
         </Box>
-      </form>
-    </div>
+      </FormControl>
+    </Box>
   );
 };

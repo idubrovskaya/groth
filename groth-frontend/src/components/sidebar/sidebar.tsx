@@ -1,8 +1,4 @@
-import {
-  ChevronLeftOutlined,
-  ChevronRightOutlined,
-  LogoutOutlined,
-} from '@mui/icons-material';
+import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material';
 import {
   Box,
   Drawer,
@@ -17,11 +13,14 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { navMenu } from '../../../common/moks/navigate';
-import { tokens } from '../../../assets/theme';
-import Logo from '../../../assets/images/logo-groth.svg';
+import { navMenu } from '../../common/moks/navigate';
+import { tokens } from '../../assets/theme';
+import Logo from '../../assets/images/logo-groth.svg';
+import { ISidebarProps } from '../../core/types/sidebar';
 
-export const Sidebar = (props: any) => {
+export const Sidebar: React.FC<ISidebarProps> = (
+  props: ISidebarProps
+): JSX.Element => {
   const { matches, drawerWidth, isOpen, setIsOpen } = props;
 
   const [isActive, setIsActive] = useState('');
@@ -31,7 +30,7 @@ export const Sidebar = (props: any) => {
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    setIsActive(pathname.substring(1));
+    setIsActive(pathname);
   }, [pathname]);
 
   return (
@@ -100,14 +99,30 @@ export const Sidebar = (props: any) => {
                   <ListItem key={el.id}>
                     <ListItemButton
                       sx={{
-                        '&:hover': {
-                          backgroundColor: '#1900d5 !important',
-                          color: '#fff',
-                          borderRadius: '4px',
-                          '& .MuiSvgIcon-root': {
-                            color: `${colors.white.DEFAULT} !important`,
-                          },
-                        },
+                        ...(isActive === el.path
+                          ? {
+                              '&:hover': {
+                                backgroundColor: '#1900d5 !important',
+                                color: '#fff',
+                                borderRadius: '4px',
+                                '& .MuiSvgIcon-root': {
+                                  color: `${colors.white.DEFAULT} !important`,
+                                },
+                              },
+                              backgroundColor: '#1900d5 !important',
+                              color: '#fff !important',
+                              borderRadius: '4px !important',
+                            }
+                          : {
+                              '&:hover': {
+                                backgroundColor: '#1900d5 !important',
+                                color: '#fff',
+                                borderRadius: '4px',
+                                '& .MuiSvgIcon-root': {
+                                  color: `${colors.white.DEFAULT} !important`,
+                                },
+                              },
+                            }),
                       }}
                       onClick={() => navigate(`${el.path}`)}
                     >
