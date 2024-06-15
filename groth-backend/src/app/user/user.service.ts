@@ -4,10 +4,15 @@ import { User } from './models/user.model';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto, UserDto } from './dto/user.dto';
 import { WatchList } from '../watchlist/models/watchlist.model';
+import { SecurityService } from '../security/security.service';
+import { AuthUserResponse } from '../auth/response';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User) private readonly user_repo: typeof User) {}
+  constructor(
+    @InjectModel(User) private readonly user_repo: typeof User,
+    private readonly securityService: SecurityService,
+  ) {}
   async hashPassword(password: string): Promise<string> {
     try {
       return bcrypt.hash(password, 10);
@@ -39,9 +44,9 @@ export class UserService {
     }
   }
 
-  async publicUser(email: string): Promise<User> {
+  async publicUser(email: string): Promise<AuthUserResponse> {
     try {
-      return this.user_repo.findOne({
+      const user = await this.user_repo.findOne({
         where: { email },
         attributes: { exclude: ['password'] },
         include: {
@@ -49,6 +54,8 @@ export class UserService {
           required: false,
         },
       });
+      const token = await this.securityService.generateJwtToken(user);
+      return { user, token };
     } catch (error) {
       throw new Error(error);
     }

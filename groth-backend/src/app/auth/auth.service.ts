@@ -14,13 +14,14 @@ export class AuthService {
     private readonly securityService: SecurityService,
   ) {}
 
-  async registerUser(dto: UserDto): Promise<UserDto> {
+  async registerUser(dto: UserDto): Promise<AuthUserResponse> {
     try {
       const existUser = await this.userService.findUserByEmail(dto.email);
       if (existUser) throw new BadRequestException(AppError.USER_EXIST);
-      return this.userService.createUser(dto);
+      await this.userService.createUser(dto);
+      return this.userService.publicUser(dto.email);
     } catch (error) {
-      throw new Error(error);
+      throw new BadRequestException(error, { cause: new Error() });
     }
   }
 
@@ -38,11 +39,7 @@ export class AuthService {
         throw new BadRequestException({ message: AppError.WRONG_DATA });
       }
 
-      const user = await this.userService.publicUser(dto.email);
-
-      const token = await this.securityService.generateJwtToken(user);
-
-      return { user, token };
+      return this.userService.publicUser(dto.email);
     } catch (error) {
       throw new Error(error);
     }
