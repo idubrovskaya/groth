@@ -1,14 +1,14 @@
-import { Home } from './pages/home/home-page';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRouter } from './app.routes';
-import { AuthRootComponent } from './components/auth/auth-root-component';
 import { ColorModeContext, useMode } from './assets/theme';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
+import { Watchlist } from './pages/watchlist/watchlist';
 import { LayoutComponent } from './components/layout/layout';
 import { NewsComponent } from './pages/news/news';
 import { SettingsComponents } from './pages/settings/settings';
-import { Watchlist } from './pages/watchlist/watchlist';
+import { Home } from './pages/home/home-page';
+import { AuthRootComponent } from './components/auth/auth-root-component';
 
 function App() {
   const [theme, colorMode] = useMode();
