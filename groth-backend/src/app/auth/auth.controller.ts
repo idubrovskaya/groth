@@ -11,9 +11,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiTags('API')
-  @ApiResponse({ status: 201, type: UserDto })
-  @Post('register')
-  register(@Body() dto: UserDto): Promise<UserDto> {
+  @ApiResponse({ status: 201, type: AuthUserResponse })
+  @Post('sign-up')
+  register(@Body() dto: UserDto): Promise<AuthUserResponse> {
     console.log(dto);
     return this.authService.registerUser(dto);
   }
