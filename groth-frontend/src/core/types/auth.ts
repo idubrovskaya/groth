@@ -30,7 +30,7 @@ export interface IWatchList {
 export interface IPublicUser {
   id: number | null;
   firstName: string;
-  userName: string;
+  username: string;
   email: string;
   createdAt: string;
   updatedAt: string;
@@ -40,4 +40,17 @@ export interface IPublicUser {
 export interface IAuthState {
   user: IPublicUser;
   isLogged: boolean;
+}
+
+// for redux
+export interface ISignInData {
+  email: string;
+  password: string;
+}
+
+export interface ISignUpData {
+  email: string;
+  password: string;
+  firstName: string;
+  username: string;
 }

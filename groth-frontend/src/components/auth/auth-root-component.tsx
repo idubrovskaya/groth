@@ -4,11 +4,11 @@ import { SignUpPage } from './sign-up';
 import { Box, FormControl } from '@mui/material';
 import { instance } from '../../core/api';
 import { useAppDispatch } from '../../core/store/store';
-import { signIn } from '../../core/store/auth/auth.slice';
 import { AppErrorsEnum } from '../../core/constants/errors';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema, signUpSchema } from '../../core/schemes/yup';
+import { signIn, signUp } from '../../core/store/auth/auth.actions';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -29,13 +29,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
   const handleSubmitForm = async (data: any) => {
     if (location.pathname === '/sign-in') {
       try {
-        const userData = {
-          email: data.email,
-          password: data.password,
-        };
-
-        const user = await instance.post('auth/sign-in', userData);
-        await dispatch(signIn(user.data));
+        await dispatch(signIn(data));
         navigate('/');
       } catch (error) {
         return error;
@@ -45,15 +39,15 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
         try {
           const userData = {
             firstName: data.name,
-            userName: data.username,
+            username: data.username,
             email: data.email,
             password: data.password,
           };
-          const newUser = await instance.post('auth/sign-up', userData);
-          await dispatch(signIn(newUser.data));
+          await dispatch(signUp(userData));
+          console.log(typeof userData.username, 'type');
           navigate('/');
         } catch (error) {
-          console.log(error);
+          console.log('ошибка!!', error);
           return error;
         }
       } else {

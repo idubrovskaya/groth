@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, Button } from '@mui/material';
+import { Typography, Box, TextField } from '@mui/material';
 import React from 'react';
 import { IPropsSignUp } from '../../core/types/auth';
 import { AppButton } from '../ui/button';
@@ -37,7 +37,7 @@ export const SignUpPage: React.FC<IPropsSignUp> = (
           variant='outlined'
           placeholder='Enter your name'
           helperText={errors.name ? `${errors.name.message}` : ''}
-          error={!!errors.email}
+          error={!!errors.name}
           {...register('name')}
         />
         <TextField
@@ -49,7 +49,7 @@ export const SignUpPage: React.FC<IPropsSignUp> = (
           variant='outlined'
           placeholder='Enter your username'
           helperText={errors.username ? `${errors.username.message}` : ''}
-          error={!!errors.email}
+          error={!!errors.username}
           {...register('username')}
         />
         <TextField
@@ -73,7 +73,7 @@ export const SignUpPage: React.FC<IPropsSignUp> = (
           variant='outlined'
           placeholder='Enter your password'
           helperText={errors.password ? `${errors.password.message}` : ''}
-          error={!!errors.email}
+          error={!!errors.password}
           {...register('password')}
         />
         <TextField
@@ -87,7 +87,7 @@ export const SignUpPage: React.FC<IPropsSignUp> = (
           helperText={
             errors.confirmPassword ? `${errors.confirmPassword.message}` : ''
           }
-          error={!!errors.email}
+          error={!!errors.password}
           {...register('confirmPassword')}
         />
       </Box>

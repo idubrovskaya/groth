@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '../../types/auth';
+import { signIn, signUp } from './auth.actions';
 
 const initialState: IAuthState = {
   user: {
     id: null,
     firstName: '',
-    userName: '',
+    username: '',
     email: '',
     createdAt: '',
     updatedAt: '',
@@ -26,13 +27,18 @@ const initialState: IAuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    signIn(state, action) {
-      state.user = action.payload;
-      state.isLogged = true;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(signIn.fulfilled, (state, { payload }) => {
+        state.user = payload;
+        state.isLogged = true;
+      })
+      .addCase(signUp.fulfilled, (state, { payload }) => {
+        state.user = payload;
+        state.isLogged = true;
+      });
   },
 });
 
-export const { signIn } = authSlice.actions;
 export default authSlice.reducer;
