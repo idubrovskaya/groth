@@ -22,6 +22,7 @@ const initialState: IAuthState = {
     ],
   },
   isLogged: false,
+  isLoading: false,
 };
 
 export const authSlice = createSlice({
@@ -30,13 +31,30 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(signIn.pending, (state) => {
+        state.isLogged = false;
+        state.isLoading = true;
+      })
       .addCase(signIn.fulfilled, (state, { payload }) => {
         state.user = payload;
         state.isLogged = true;
       })
+
+      .addCase(signIn.rejected, (state) => {
+        state.isLogged = false;
+        state.isLoading = false;
+      })
+      .addCase(signUp.pending, (state) => {
+        state.isLogged = false;
+        state.isLoading = true;
+      })
       .addCase(signUp.fulfilled, (state, { payload }) => {
         state.user = payload;
         state.isLogged = true;
+      })
+      .addCase(signUp.rejected, (state) => {
+        state.isLogged = false;
+        state.isLoading = false;
       });
   },
 });

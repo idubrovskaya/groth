@@ -7,6 +7,8 @@ export const signIn = createAsyncThunk(
   async (data: ISignInData, { rejectWithValue }) => {
     try {
       const user = await instance.post('auth/sign-in', data);
+      localStorage.setItem('accessToken', user.data.token);
+      localStorage.setItem('firstName', user.data.user.firstName);
       return user.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -23,6 +25,8 @@ export const signUp = createAsyncThunk(
   async (data: ISignUpData, { rejectWithValue }) => {
     try {
       const newUser = await instance.post('auth/sign-up', data);
+      localStorage.setItem('accessToken', newUser.data.token);
+      localStorage.setItem('firstName', newUser.data.firstName);
 
       return newUser.data;
     } catch (error: any) {
