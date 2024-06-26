@@ -9,6 +9,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema, signUpSchema } from '../../core/schemes/yup';
 import { signIn, signUp } from '../../core/store/auth/auth.actions';
+import { ISignUpData } from '../../core/types/auth';
+import { useAppSelector } from '../../core/store/auth/auth.selector';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -26,6 +28,8 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     ),
   });
 
+  const loading = useAppSelector((state) => state.auth.isLoading);
+
   const handleSubmitForm = async (data: any) => {
     if (location.pathname === '/sign-in') {
       try {
@@ -37,17 +41,17 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     } else {
       if (data.password === data.confirmPassword) {
         try {
-          const userData = {
+          const userData: ISignUpData = {
             firstName: data.name,
-            username: data.username,
+            userName: data.username,
             email: data.email,
             password: data.password,
           };
           await dispatch(signUp(userData));
-          console.log(typeof userData.username, 'type');
+          console.log(userData, 'dannye');
+
           navigate('/');
         } catch (error) {
-          console.log('ошибка!!', error);
           return error;
         }
       } else {
@@ -88,12 +92,14 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
               register={register}
               errors={errors}
               navigate={navigate}
+              loading={loading}
             />
           ) : location.pathname === '/sign-up' ? (
             <SignUpPage
               navigate={navigate}
               register={register}
               errors={errors}
+              loading={loading}
             />
           ) : null}
         </Box>

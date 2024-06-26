@@ -1,11 +1,11 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { IPropsSignIn } from '../../core/types/auth';
-import { AppButton } from '../ui/button';
+import { AppLoadingButton } from '../ui/loading-button';
 
 export const SignInPage: React.FC<IPropsSignIn> = (
   props: IPropsSignIn
 ): JSX.Element => {
-  const { register, navigate, errors } = props;
+  const { register, navigate, errors, loading } = props;
   return (
     <>
       <Typography variant='h5' textAlign={'center'} padding={2}>
@@ -41,9 +41,9 @@ export const SignInPage: React.FC<IPropsSignIn> = (
           {...register('password')}
         />
       </Box>
-      <AppButton variant='contained' type='submit'>
+      <AppLoadingButton loading={loading} variant='contained' type='submit'>
         Sign in
-      </AppButton>
+      </AppLoadingButton>
 
       <Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
         Don't have an account?

@@ -24,8 +24,6 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
   props: ITopbarProps
 ): JSX.Element => {
   const { isOpen, setIsOpen } = props;
-  const { firstName } = useAppSelector((state) => state.auth.user);
-  console.log('user', firstName);
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   const colors = tokens(theme.palette.mode);
@@ -52,7 +50,9 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
             sx={{ mr: '10px', cursor: 'pointer' }}
             onClick={() => setIsOpen(!isOpen)}
           />
-          <Typography variant='h3'>Welcome, {firstName}</Typography>{' '}
+          <Typography variant='h3'>
+            Welcome, {localStorage.getItem('firstName')}
+          </Typography>{' '}
         </Box>
         <Box display={'flex'}>
           <Grid

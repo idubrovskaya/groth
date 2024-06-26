@@ -7,6 +7,7 @@ export interface IPropsSignIn<
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
   navigate: (to: string) => void;
+  loading: boolean;
 }
 
 export interface IPropsSignUp<
@@ -16,6 +17,7 @@ export interface IPropsSignUp<
   navigate: (to: string) => void;
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
+  loading: boolean;
 }
 
 export interface IWatchList {
@@ -40,6 +42,7 @@ export interface IPublicUser {
 export interface IAuthState {
   user: IPublicUser;
   isLogged: boolean;
+  isLoading: boolean;
 }
 
 // for redux
@@ -52,5 +55,5 @@ export interface ISignUpData {
   email: string;
   password: string;
   firstName: string;
-  username: string;
+  userName: string;
 }
