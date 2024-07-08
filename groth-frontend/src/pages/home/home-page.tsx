@@ -6,8 +6,9 @@ import { getFavoriteAssets } from '../../core/store/crypto/crypto.actions';
 import { useAppSelector } from '../../core/store/auth/auth.selector';
 import { Box, Grid, useTheme } from '@mui/material';
 import { tokens } from '../../assets/theme';
+import { AreaChart } from '../../components/charts/area-chart';
 
-export const Home = () => {
+export const Home: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -62,6 +63,9 @@ export const Home = () => {
               <h3 className={styles.cardPrice}>{currentPrice[1].toFixed(4)}</h3>
               <p> {currentCap[1].toFixed(0)}</p>
             </div>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={6}>
+            <AreaChart data={element.data.prices} />
           </Grid>
         </Grid>
       </Grid>
