@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { SignInPage } from './sign-in';
 import { SignUpPage } from './sign-up';
 import { Box, FormControl } from '@mui/material';
-import { instance } from '../../core/api';
 import { useAppDispatch } from '../../core/store/store';
 import { AppErrorsEnum } from '../../core/constants/errors';
 import { useForm } from 'react-hook-form';

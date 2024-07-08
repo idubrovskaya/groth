@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import authSlice from './auth/auth.slice';
+import cryptoSlice from './crypto/crypto.slice';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
+    crypto: cryptoSlice,
   },
 });
 
