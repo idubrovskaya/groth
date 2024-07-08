@@ -1,7 +1,6 @@
 import { Typography, Box, TextField } from '@mui/material';
 import React from 'react';
 import { IPropsSignUp } from '../../core/types/auth';
-import { AppButton } from '../ui/button';
 import { AppLoadingButton } from '../ui/loading-button';
 
 export const SignUpPage: React.FC<IPropsSignUp> = (

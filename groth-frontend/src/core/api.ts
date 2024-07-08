@@ -6,3 +6,8 @@ export const instance = axios.create({
   // headers: { 'X-Custom-Header': 'foobar' },
   withCredentials: false,
 });
+
+export const coinGeckoApi = axios.create({
+  baseURL: 'https://api.coingecko.com/api/v3',
+  withCredentials: false,
+});

@@ -1,0 +1,18 @@
+.assetName {
+  font-size: 25;
+  font-weight: 600;
+  line-height: 30px;
+  text-transform: capitalize;
+}
+.itemDetails {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 35px;
+}
+.cardPrice {
+  font-size: 32;
+  font-weight: 700;
+  line-height: 48px;
+}
