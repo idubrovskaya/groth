@@ -10,6 +10,8 @@ import { AreaChart } from '../../components/charts/area-chart';
 
 import TrendUp from '../../assets/images/trend-up.svg';
 import TrendDown from '../../assets/images/trend-down.svg';
+import { LineChart } from '../../components/charts/line-chart';
+import { IChartData } from '../../core/types/assets';
 
 export const Home: React.FC = (): JSX.Element => {
   const theme = useTheme();
@@ -17,7 +19,7 @@ export const Home: React.FC = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const fetchDataRef = useRef(false);
-  const favoriteAssets: any[] = useAppSelector(
+  const favoriteAssets: IChartData[] = useAppSelector(
     (state) => state.crypto.favoriteAssets
   );
   const favoriteAssetId = useMemo(() => ['bitcoin', 'ethereum'], []);
@@ -45,14 +47,12 @@ export const Home: React.FC = (): JSX.Element => {
     const currentPrice = element.singleAsset.map(
       (element: any) => element.current_price
     );
-    const currentCap = element.singleAsset.map(
-      (element: any) => element.market_cap
-    );
+
     const changedPrice = element.singleAsset.map(
       (element: any) => element.price_change_percentage_24h
     );
     return (
-      <Grid item lg={6} sm={6} xs={12}>
+      <Grid item lg={6} sm={6} xs={12} key={element.name}>
         <Grid
           container
           sx={{
@@ -64,7 +64,7 @@ export const Home: React.FC = (): JSX.Element => {
             p: '20px 16px',
             minHeight: 185,
             border: `1px solid ${colors.borderColor}`,
-            borderRadius: 6,
+            borderRadius: 12,
           }}
         >
           <Grid item xs={12} sm={6} lg={6}>
@@ -88,7 +88,7 @@ export const Home: React.FC = (): JSX.Element => {
             </div>
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <AreaChart data={element.data} />
+            <AreaChart data={element.price_chart_data} />
           </Grid>
         </Grid>
       </Grid>
@@ -97,8 +97,26 @@ export const Home: React.FC = (): JSX.Element => {
 
   return (
     <Box sx={{ flexGrow: 1, p: '32px' }}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={styles.areaChart}>
         {renderFavoriteBlock}
+      </Grid>
+      <Grid
+        container
+        sx={{
+          backgroundColor: `${
+            theme.palette.mode === 'light'
+              ? colors.primary.DEFAULT
+              : colors.primary[600]
+          }`,
+          p: '20px 16px',
+          minHeight: 270,
+          border: `1px solid ${colors.borderColor}`,
+          borderRadius: 12,
+        }}
+      >
+        <Grid item xs={12} sm={12} lg={12}>
+          {filteredArray.length && <LineChart data={filteredArray} />}
+        </Grid>
       </Grid>
     </Box>
   );
