@@ -31,16 +31,16 @@ export const AreaChart = (props: IAreaChartProps) => {
     },
   };
   const values = {
-    labels: data.map((el: number[]): string =>
-      moment(el[0]).format('DD.MM.YY')
+    labels: data.map((element: number[]): string =>
+      moment(element[0]).format('DD.MM.YY')
     ),
     datasets: [
       {
-        fill: 'start',
         label: 'Price',
-        data: data.map((el: number[]): number => {
-          return el[1] as number;
+        data: data.map((element: number[]): number => {
+          return element[1] as number;
         }),
+        fill: 'start',
         backgroundColor: (context: ScriptableContext<'line'>) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 180);

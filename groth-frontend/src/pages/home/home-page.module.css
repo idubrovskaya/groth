@@ -23,7 +23,7 @@
   align-items: center;
   padding: 2px;
   background-color: #a9ffa7;
-  border-radius: 4;
+  border-radius: 4px;
 }
 
 .trendUp {
@@ -34,4 +34,7 @@
 .trendDown {
   background-color: #ffa7a7;
   color: #740000;
+}
+.areaChart {
+  margin-bottom: 32;
 }
