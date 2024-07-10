@@ -16,3 +16,22 @@
   font-weight: 700;
   line-height: 48px;
 }
+
+.priceTrend {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  background-color: #a9ffa7;
+  border-radius: 4;
+}
+
+.trendUp {
+  background-color: #a9ffa7;
+  color: #037400;
+}
+
+.trendDown {
+  background-color: #ffa7a7;
+  color: #740000;
+}

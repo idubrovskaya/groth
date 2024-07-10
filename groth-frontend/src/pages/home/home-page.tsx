@@ -8,6 +8,9 @@ import { Box, Grid, useTheme } from '@mui/material';
 import { tokens } from '../../assets/theme';
 import { AreaChart } from '../../components/charts/area-chart';
 
+import TrendUp from '../../assets/images/trend-up.svg';
+import TrendDown from '../../assets/images/trend-down.svg';
+
 export const Home: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -39,8 +42,15 @@ export const Home: React.FC = (): JSX.Element => {
   }, [favoriteAssetId, fetchData]);
 
   const renderFavoriteBlock = filteredArray.map((element: any) => {
-    const currentPrice = element.data.prices[0];
-    const currentCap = element.data.market_caps[0];
+    const currentPrice = element.singleAsset.map(
+      (element: any) => element.current_price
+    );
+    const currentCap = element.singleAsset.map(
+      (element: any) => element.market_cap
+    );
+    const changedPrice = element.singleAsset.map(
+      (element: any) => element.price_change_percentage_24h
+    );
     return (
       <Grid item lg={6} sm={6} xs={12}>
         <Grid
@@ -60,12 +70,25 @@ export const Home: React.FC = (): JSX.Element => {
           <Grid item xs={12} sm={6} lg={6}>
             <h3 className={styles.assetName}>{element.name}</h3>
             <div className={styles.itemDetails}>
-              <h3 className={styles.cardPrice}>{currentPrice[1].toFixed(4)}</h3>
-              <p> {currentCap[1].toFixed(0)}</p>
+              <h3 className={styles.cardPrice}>${currentPrice}</h3>
+              <Box
+                className={
+                  changedPrice > 0
+                    ? `${styles.priceTrend} ${styles.trendUp}`
+                    : `${styles.priceTrend} ${styles.trendDown}`
+                }
+              >
+                {changedPrice > 0 ? (
+                  <img src={TrendUp} alt='trend-up' />
+                ) : (
+                  <img src={TrendDown} alt='trend-down' />
+                )}
+                <span>{Number(changedPrice).toFixed(2)}%</span>
+              </Box>
             </div>
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <AreaChart data={element.data.prices} />
+            <AreaChart data={element.data} />
           </Grid>
         </Grid>
       </Grid>
