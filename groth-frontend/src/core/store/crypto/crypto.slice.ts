@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFavoriteAssets } from './crypto.actions';
+import { getFavoriteAssets, getTopPriceData } from './crypto.actions';
 
 const initialState: any = {
   assets: [],
@@ -13,6 +13,9 @@ export const cryptoSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getFavoriteAssets.fulfilled, (state, action) => {
       state.favoriteAssets.push(action.payload);
+    });
+    builder.addCase(getTopPriceData.fulfilled, (state, action) => {
+      state.assets = action.payload;
     });
   },
 });
