@@ -7,9 +7,16 @@ export const LineChart = (props: ILineChartProps) => {
 
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
     plugins: {
       legend: {
-        display: false,
+        position: 'top' as const,
       },
     },
   };
@@ -20,7 +27,7 @@ export const LineChart = (props: ILineChartProps) => {
     ),
     datasets: [
       {
-        label: 'Price',
+        label: data[0].name.charAt(0).toUpperCase() + data[0].name.slice(1),
         data: data[0].price_chart_data.map((el: any) => {
           return el[1];
         }),
