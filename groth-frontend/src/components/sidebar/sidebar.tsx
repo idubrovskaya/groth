@@ -17,6 +17,8 @@ import { navMenu } from '../../common/moks/navigate';
 import { tokens } from '../../assets/theme';
 import Logo from '../../assets/images/logo-groth.svg';
 import { ISidebarProps } from '../../core/types/sidebar';
+import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
+import { SearchBar } from '../search-bar/search-bar';
 
 export const Sidebar: React.FC<ISidebarProps> = (
   props: ISidebarProps
@@ -93,6 +95,13 @@ export const Sidebar: React.FC<ISidebarProps> = (
                 )}
               </Box>
             </Box>
+            <List>
+              {!matches && (
+                <ListItem>
+                  <SearchBar />
+                </ListItem>
+              )}
+            </List>
             <List sx={{ marginBottom: '55px' }}>
               {navMenu.map((el): JSX.Element => {
                 return (
@@ -136,6 +145,13 @@ export const Sidebar: React.FC<ISidebarProps> = (
           </Box>
           <Box width='100%'>
             <List>
+              {!matches && (
+                <ListItem>
+                  <Box padding={'5px'}>
+                    <ThemeSwitcher />
+                  </Box>
+                </ListItem>
+              )}
               <ListItem>
                 <ListItemButton
                   sx={{

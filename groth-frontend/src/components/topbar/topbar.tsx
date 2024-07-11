@@ -2,28 +2,21 @@ import {
   AppBar,
   Box,
   Grid,
-  IconButton,
-  InputBase,
   Toolbar,
   Typography,
   useTheme,
 } from '@mui/material';
 import { useContext } from 'react';
-import { useAppSelector } from '../../core/store/auth/auth.selector';
-import {
-  NotificationsNoneOutlined,
-  Search,
-  DarkMode,
-  LightMode,
-  MenuOutlined,
-} from '@mui/icons-material';
+import { MenuOutlined } from '@mui/icons-material';
 import { ColorModeContext, tokens } from '../../assets/theme';
 import { ITopbarProps } from '../../core/types/topbar';
+import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
+import { SearchBar } from '../search-bar/search-bar';
 
 export const TopBarComponent: React.FC<ITopbarProps> = (
   props: ITopbarProps
 ): JSX.Element => {
-  const { isOpen, setIsOpen } = props;
+  const { isOpen, setIsOpen, matches } = props;
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   const colors = tokens(theme.palette.mode);
@@ -39,85 +32,38 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
       }}
     >
       <Toolbar sx={{ justifyContent: 'space-between', p: '25px 45px' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <MenuOutlined
-            sx={{ mr: '10px', cursor: 'pointer' }}
-            onClick={() => setIsOpen(!isOpen)}
-          />
-          <Typography variant='h3'>
-            Welcome, {localStorage.getItem('firstName')}
-          </Typography>{' '}
-        </Box>
-        <Box display={'flex'}>
-          <Grid
-            sx={{
-              pr: '37px',
-              pt: '10px',
-              borderRight: `1px solid ${colors.borderColor}`,
-            }}
-            onClick={colorMode.toggleColorMode}
-          >
-            <IconButton sx={{ ml: '45px' }}>
-              {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
-            </IconButton>
-            <IconButton>
-              <NotificationsNoneOutlined />
-            </IconButton>
-          </Grid>
-          <Grid
-            sx={{
-              display: 'flex',
-              borderRadius: '8px',
-              maxHeight: '45px',
-              backgroundColor: `${colors.primary[600]}`,
-              marginLeft: '28px',
-            }}
-          >
-            <IconButton
+        <Grid container justifyContent={'space-between'} alignItems={'center'}>
+          <Grid item sm={3} lg={3}>
+            <Box
               sx={{
-                '&:hover': {
-                  backgroundColor: 'transparent',
-                },
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
               }}
             >
-              <Search />
-            </IconButton>
-            <InputBase placeholder='Search' sx={{ padding: '1rem 0.rem' }} />
+              <MenuOutlined
+                sx={{ mr: '10px', cursor: 'pointer' }}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+              <Typography variant='h3'>
+                Welcome, {localStorage.getItem('firstName')}
+              </Typography>{' '}
+            </Box>
           </Grid>
-        </Box>
+          {matches && (
+            <Grid
+              item
+              sm={9}
+              lg={9}
+              display={'flex'}
+              justifyContent={'flex-end'}
+            >
+              <ThemeSwitcher />
+              <SearchBar />
+            </Grid>
+          )}
+        </Grid>
       </Toolbar>
     </AppBar>
-    // <Box className={classes.root} sx={{ flexGrow: 1 }}>
-    //   <Grid>Welcome, {firstName}</Grid>
-    //   <Box display={'flex'}>
-    //     <Grid
-    //       className={classes.iconsBlock}
-    //       onClick={colorMode.toggleColorMode}
-    //     >
-    //       <IconButton className={classes.themeIcon}>
-    //         {theme.palette.mode === 'dark' ? (
-    //           <DarkModeIcon />
-    //         ) : (
-    //           <LightModeIcon />
-    //         )}
-    //       </IconButton>
-    //       <IconButton>
-    //         <NotificationsNoneOutlinedIcon />
-    //       </IconButton>
-    //     </Grid>
-    //     <Grid className={classes.searchBlock}>
-    //       <IconButton className={classes.searchIcon}>
-    //         <SearchIcon />
-    //       </IconButton>
-    //       <InputBase placeholder='Search' className={classes.searchInput} />
-    //     </Grid>
-    //   </Box>
-    // </Box>
   );
 };
