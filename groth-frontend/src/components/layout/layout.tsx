@@ -7,7 +7,7 @@ import { TopBarComponent } from '../topbar/topbar';
 export const LayoutComponent: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const matches = useMediaQuery('(min-width:600px)');
+  const matches = useMediaQuery('(min-width:760px)');
   return location.pathname === '/sign-in' ||
     location.pathname === '/sign-up' ? (
     <>
@@ -34,7 +34,11 @@ export const LayoutComponent: React.FC = (): JSX.Element => {
           flexGrow: 1,
         }}
       >
-        <TopBarComponent isOpen={isOpen} setIsOpen={setIsOpen} />
+        <TopBarComponent
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          matches={matches}
+        />
         <Outlet />
       </Box>
     </Box>
