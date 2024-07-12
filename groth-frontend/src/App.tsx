@@ -9,6 +9,7 @@ import { NewsComponent } from './pages/news/news';
 import { SettingsComponents } from './pages/settings/settings';
 import { Home } from './pages/home/home-page';
 import { AuthRootComponent } from './components/auth/auth-root-component';
+import { SingleAssetPage } from './pages/single-asset/single-asset';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/news' element={<NewsComponent />} />
                 <Route path='/settings' element={<SettingsComponents />} />
                 <Route path='/watchlist' element={<Watchlist />} />
+                <Route path='/single/:id' element={<SingleAssetPage />} />
               </Route>
               <Route path='sign-in' element={<AuthRootComponent />} />
               <Route path='sign-up' element={<AuthRootComponent />} />
