@@ -6,9 +6,8 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import { useContext } from 'react';
 import { MenuOutlined } from '@mui/icons-material';
-import { ColorModeContext, tokens } from '../../assets/theme';
+import { tokens } from '../../assets/theme';
 import { ITopbarProps } from '../../core/types/topbar';
 import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
 import { SearchBar } from '../search-bar/search-bar';
@@ -18,7 +17,6 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
 ): JSX.Element => {
   const { isOpen, setIsOpen, matches } = props;
   const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
   const colors = tokens(theme.palette.mode);
 
   return (

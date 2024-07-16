@@ -3,7 +3,7 @@ import { PrivateRouter } from './app.routes';
 import { ColorModeContext, useMode } from './assets/theme';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
-import { Watchlist } from './pages/watchlist/watchlist';
+import { WatchListPage } from './pages/watchlist/watchlist';
 import { LayoutComponent } from './components/layout/layout';
 import { NewsComponent } from './pages/news/news';
 import { SettingsComponents } from './pages/settings/settings';
@@ -24,7 +24,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/news' element={<NewsComponent />} />
                 <Route path='/settings' element={<SettingsComponents />} />
-                <Route path='/watchlist' element={<Watchlist />} />
+                <Route path='/watchlist' element={<WatchListPage />} />
                 <Route path='/single/:id' element={<SingleAssetPage />} />
               </Route>
               <Route path='sign-in' element={<AuthRootComponent />} />
