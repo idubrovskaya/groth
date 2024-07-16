@@ -3,9 +3,9 @@ import {
   LightMode,
   NotificationsNoneOutlined,
 } from '@mui/icons-material';
-import { Grid, colors, IconButton, useTheme } from '@mui/material';
+import { Grid,  IconButton, useTheme } from '@mui/material';
 import { useContext } from 'react';
-import { ColorModeContext, tokens } from '../../assets/theme';
+import { ColorModeContext } from '../../assets/theme';
 
 export const ThemeSwitcher = () => {
   const theme = useTheme();
