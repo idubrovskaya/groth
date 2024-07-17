@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../core/store/auth/auth.selector';
 import { useAppDispatch } from '../../core/store/store';
 
 import { ISingleAsset } from '../../core/types/assets';
-import { Avatar, Box, Button, Grid, Typography, useTheme } from '@mui/material';
+import {
+  Alert,
+  AlertColor,
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  Snackbar,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 import { tokens } from '../../assets/theme';
 import styles from './single-asset.module.css';
@@ -12,6 +22,9 @@ import styles from './single-asset.module.css';
 import { createWatchListRecord } from '../../core/store/crypto/crypto.actions';
 
 export const SingleAssetPage: React.FC = (): JSX.Element => {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState<AlertColor>('success');
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -29,16 +42,29 @@ export const SingleAssetPage: React.FC = (): JSX.Element => {
   );
 
   const handleCreateRecord = () => {
-    const data = {
-      name: '',
-      assetId: '',
-    };
-    if (asset) {
-      data.name = asset.name;
-      data.assetId = asset.id;
-    }
+    try {
+      const data = {
+        name: '',
+        assetId: '',
+      };
+      if (asset) {
+        data.name = asset.name;
+        data.assetId = asset.id;
+      }
 
-    dispatch(createWatchListRecord(data));
+      dispatch(createWatchListRecord(data));
+      setSeverity('success');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 3000);
+    } catch (error) {
+      setSeverity('error');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 3000);
+    }
   };
 
   return (
@@ -244,6 +270,11 @@ export const SingleAssetPage: React.FC = (): JSX.Element => {
               Add to favorite
             </Button>
           </Grid>
+          <Snackbar open={open} autoHideDuration={6000}>
+            <Alert severity={severity} variant='filled' sx={{ width: '100%' }}>
+              Currency added to favorite!
+            </Alert>
+          </Snackbar>
         </Grid>
       )}
     </>

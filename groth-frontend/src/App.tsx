@@ -5,7 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { WatchListPage } from './pages/watchlist/watchlist';
 import { LayoutComponent } from './components/layout/layout';
-import { NewsComponent } from './pages/news/news';
+import { NewsPage } from './pages/news/news';
 import { SettingsComponents } from './pages/settings/settings';
 import { Home } from './pages/home/home-page';
 import { AuthRootComponent } from './components/auth/auth-root-component';
@@ -22,7 +22,7 @@ function App() {
             <Route element={<LayoutComponent />}>
               <Route element={<PrivateRouter />}>
                 <Route path='/' element={<Home />} />
-                <Route path='/news' element={<NewsComponent />} />
+                <Route path='/news' element={<NewsPage />} />
                 <Route path='/settings' element={<SettingsComponents />} />
                 <Route path='/watchlist' element={<WatchListPage />} />
                 <Route path='/single/:id' element={<SingleAssetPage />} />
