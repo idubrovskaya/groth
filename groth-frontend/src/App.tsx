@@ -6,7 +6,7 @@ import { CssBaseline } from '@mui/material';
 import { WatchListPage } from './pages/watchlist/watchlist';
 import { LayoutComponent } from './components/layout/layout';
 import { NewsPage } from './pages/news/news';
-import { SettingsComponents } from './pages/settings/settings';
+import { SettingsPage } from './pages/settings/settings';
 import { Home } from './pages/home/home-page';
 import { AuthRootComponent } from './components/auth/auth-root-component';
 import { SingleAssetPage } from './pages/single-asset/single-asset';
@@ -23,7 +23,7 @@ function App() {
               <Route element={<PrivateRouter />}>
                 <Route path='/' element={<Home />} />
                 <Route path='/news' element={<NewsPage />} />
-                <Route path='/settings' element={<SettingsComponents />} />
+                <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/watchlist' element={<WatchListPage />} />
                 <Route path='/single/:id' element={<SingleAssetPage />} />
               </Route>

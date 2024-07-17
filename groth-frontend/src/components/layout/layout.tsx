@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { TopBarComponent } from '../topbar/topbar';
 
 export const LayoutComponent: React.FC = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:760px)');
   return location.pathname === '/sign-in' ||

@@ -9,4 +9,5 @@ export const AppButton = styled(Button)({
   margin: 3,
   width: '60%',
   maxWidth: 300,
+  color: '#fff',
 });
