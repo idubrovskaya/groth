@@ -23,3 +23,8 @@ export const coinGeckoApi = axios.create({
   baseURL: 'https://api.coingecko.com/api/v3',
   withCredentials: false,
 });
+
+export const newsApi = axios.create({
+  baseURL: 'https://min-api.cryptocompare.com/data/v2/',
+  withCredentials: false,
+});
