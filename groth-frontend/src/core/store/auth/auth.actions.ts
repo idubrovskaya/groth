@@ -38,3 +38,38 @@ export const signUp = createAsyncThunk(
     }
   }
 );
+
+export const getPublicUser = createAsyncThunk(
+  'GET/get-public-user-data',
+  async (_, { rejectWithValue }) => {
+    try {
+      const user = await instance.get('auth/get-public-user-data');
+      localStorage.setItem('firstName', user.data.firstName);
+
+      return user.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updatePublicUser = createAsyncThunk(
+  'PATCH/update-user-data',
+  async (data: any, { rejectWithValue }) => {
+    try {
+      const user = await instance.patch('users', data);
+      console.log(user.data);
+      return user.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
