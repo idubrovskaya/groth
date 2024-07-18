@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../core/store/store';
 import { getPublicUser } from '../../core/store/auth/auth.actions';
 import { CustomTabPanel } from '../../components/tab-panel/custom-tab-panel';
 import { ChangePasswordComponent } from '../../components/change-password/change-password';
+import { DeleteUserComponent } from '../../components/delete-user/delete-user';
 
 export const SettingsPage = () => {
   const theme = useTheme();
@@ -51,7 +52,7 @@ export const SettingsPage = () => {
         <ChangePasswordComponent />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Delete account
+        <DeleteUserComponent />
       </CustomTabPanel>
     </Grid>
   );
