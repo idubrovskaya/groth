@@ -7,7 +7,7 @@ import { AssetsTableComponent } from '../../components/assetsTable/assetsTable';
 import { Grid, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../assets/theme';
 
-export const WatchListPage = () => {
+export const WatchListPage:React.FC = ():JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

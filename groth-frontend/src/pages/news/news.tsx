@@ -5,7 +5,7 @@ import { useAppSelector } from '../../core/store/auth/auth.selector';
 import { Box, Grid, Link, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../assets/theme';
 
-export const NewsPage = () => {
+export const NewsPage: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

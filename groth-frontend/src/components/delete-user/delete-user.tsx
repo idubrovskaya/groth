@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../core/store/store';
 import { deleteUser } from '../../core/store/auth/auth.actions';
 
-export const DeleteUserComponent = () => {
+export const DeleteUserComponent: React.FC = (): JSX.Element => {
   const [checked, setChecked] = useState(false);
 
   const dispatch = useAppDispatch();

@@ -9,7 +9,7 @@ import {
   updatePublicUser,
 } from '../../core/store/auth/auth.actions';
 
-export const PersonalDataComponent = () => {
+export const PersonalDataComponent: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

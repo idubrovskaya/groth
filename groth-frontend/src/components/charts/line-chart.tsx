@@ -2,7 +2,9 @@ import { Line } from 'react-chartjs-2';
 import { ILineChartProps } from '../../core/types/assets';
 import moment from 'moment';
 
-export const LineChart = (props: ILineChartProps) => {
+export const LineChart: React.FC<ILineChartProps> = (
+  props: ILineChartProps
+) => {
   const { data } = props;
 
   const options = {
