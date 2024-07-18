@@ -7,7 +7,6 @@ export const AppButton = styled(Button)({
   boxShadow: '0px 1px 7px #332a76',
   padding: '10px 20px !important',
   margin: 3,
-  width: '60%',
   maxWidth: 300,
   color: '#fff',
 });

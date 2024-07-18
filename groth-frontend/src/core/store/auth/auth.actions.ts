@@ -73,3 +73,21 @@ export const updatePublicUser = createAsyncThunk(
     }
   }
 );
+
+export const changePassword = createAsyncThunk(
+  'PATCH/change-password',
+  async (
+    data: { oldPassword: string; newPassword: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      return instance.patch('users/change-password', data);
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

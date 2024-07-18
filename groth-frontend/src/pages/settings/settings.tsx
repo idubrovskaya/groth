@@ -1,11 +1,12 @@
 import { Box, Grid, Tab, Tabs, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { CustomTabPanel } from '../../components/tab-panel/custom-tab-panel';
 import { tabProps } from '../../core/utils';
 import { tokens } from '../../assets/theme';
 import { PersonalDataComponent } from '../../components/personal-data/personal-data';
 import { useAppDispatch } from '../../core/store/store';
 import { getPublicUser } from '../../core/store/auth/auth.actions';
+import { CustomTabPanel } from '../../components/tab-panel/custom-tab-panel';
+import { ChangePasswordComponent } from '../../components/change-password/change-password';
 
 export const SettingsPage = () => {
   const theme = useTheme();
@@ -47,7 +48,7 @@ export const SettingsPage = () => {
         <PersonalDataComponent />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Change password
+        <ChangePasswordComponent />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         Delete account
