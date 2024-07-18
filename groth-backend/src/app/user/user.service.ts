@@ -1,11 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models/user.model';
 import * as bcrypt from 'bcrypt';
-import { UpdateUserDto, UserDto } from './dto/user.dto';
+import { UpdatePasswordDto, UpdateUserDto, UserDto } from './dto/user.dto';
 import { WatchList } from '../watchlist/models/watchlist.model';
 import { SecurityService } from '../security/security.service';
 import { AuthUserResponse } from '../auth/response';
+import { AppError } from 'src/common/constants/errors';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,27 @@ export class UserService {
 
   async findUserByEmail(email: string): Promise<User> {
     try {
-      return this.user_repo.findOne({ where: { email } });
+      return this.user_repo.findOne({
+        where: { email },
+        include: {
+          model: WatchList,
+          required: false,
+        },
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async findUserById(id: number): Promise<User> {
+    try {
+      return this.user_repo.findOne({
+        where: { id },
+        include: {
+          model: WatchList,
+          required: false,
+        },
+      });
     } catch (error) {
       throw new Error(error);
     }
@@ -74,6 +95,21 @@ export class UserService {
     try {
       await this.user_repo.destroy({ where: { email } });
       return true;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async updatePassword(userId: number, dto: UpdatePasswordDto): Promise<any> {
+    try {
+      const { password } = await this.findUserById(userId);
+      const currentPassword = await bcrypt.compare(dto.oldPassword, password);
+      if (!currentPassword) return new BadRequestException(AppError.WRONG_DATA);
+      const newPassword = await this.hashPassword(dto.newPassword);
+      const data = {
+        password: newPassword,
+      };
+      return this.user_repo.update(data, { where: { id: userId } });
     } catch (error) {
       throw new Error(error);
     }

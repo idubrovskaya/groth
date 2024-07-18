@@ -25,10 +25,12 @@ export class AuthService {
     }
   }
 
-  async signIn(dto: UserSignInForm): Promise<AuthUserResponse> {
+  async signIn(
+    dto: UserSignInForm,
+  ): Promise<AuthUserResponse | BadRequestException> {
     try {
       const existUser = await this.userService.findUserByEmail(dto.email);
-      if (!existUser) throw new BadRequestException(AppError.USER_NOT_EXIST);
+      if (!existUser) return new BadRequestException(AppError.USER_NOT_EXIST);
 
       const validatePassword = await bcrypt.compare(
         dto.password,
