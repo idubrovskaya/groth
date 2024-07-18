@@ -74,6 +74,21 @@ export const updatePublicUser = createAsyncThunk(
   }
 );
 
+export const deleteUser = createAsyncThunk(
+  'DELETE/users',
+  async (_, { rejectWithValue }) => {
+    try {
+      return instance.delete('users');
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const changePassword = createAsyncThunk(
   'PATCH/change-password',
   async (
