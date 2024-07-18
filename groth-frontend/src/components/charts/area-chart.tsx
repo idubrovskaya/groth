@@ -5,7 +5,9 @@ import { Chart, registerables } from 'chart.js';
 import { IAreaChartProps } from '../../core/types/assets';
 Chart.register(...registerables);
 
-export const AreaChart = (props: IAreaChartProps) => {
+export const AreaChart: React.FC<IAreaChartProps> = (
+  props: IAreaChartProps
+) => {
   const { data } = props;
 
   const options = {

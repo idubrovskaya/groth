@@ -8,8 +8,11 @@ import {
   TableBody,
 } from '@mui/material';
 import styles from './assetsTable.module.css';
+import { ISingleAsset, ITablePriceData } from '../../core/types/assets';
 
-export const AssetsTableComponent = (props: any) => {
+export const AssetsTableComponent: React.FC<ITablePriceData> = (
+  props: ITablePriceData
+): JSX.Element => {
   const { assets } = props;
   return (
     <TableContainer component={Paper}>
@@ -23,7 +26,7 @@ export const AssetsTableComponent = (props: any) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {assets.map((element: any) => (
+          {assets.map((element: ISingleAsset) => (
             <TableRow
               key={element.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

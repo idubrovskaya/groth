@@ -9,7 +9,7 @@ import { CustomTabPanel } from '../../components/tab-panel/custom-tab-panel';
 import { ChangePasswordComponent } from '../../components/change-password/change-password';
 import { DeleteUserComponent } from '../../components/delete-user/delete-user';
 
-export const SettingsPage = () => {
+export const SettingsPage: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

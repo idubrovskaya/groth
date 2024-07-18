@@ -1,7 +1,9 @@
 import { Box } from '@mui/material';
-import { TabPanelProps } from '../../core/types/tabs';
+import { ITabPanelProps } from '../../core/types/tabs';
 
-export function CustomTabPanel(props: TabPanelProps) {
+export const CustomTabPanel: React.FC<ITabPanelProps> = (
+  props: ITabPanelProps
+): JSX.Element => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -15,4 +17,4 @@ export function CustomTabPanel(props: TabPanelProps) {
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
-}
+};

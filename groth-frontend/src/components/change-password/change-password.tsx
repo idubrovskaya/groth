@@ -5,7 +5,7 @@ import { AppButton } from '../ui/button';
 import { useAppDispatch } from '../../core/store/store';
 import { changePassword } from '../../core/store/auth/auth.actions';
 
-export const ChangePasswordComponent = () => {
+export const ChangePasswordComponent: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -14,7 +14,7 @@ export const ChangePasswordComponent = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleChangePassword = (event: any) => {
+  const handleChangePassword = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     const data = {
