@@ -91,9 +91,9 @@ export class UserService {
     }
   }
 
-  async deleteUser(email: string): Promise<boolean> {
+  async deleteUser(id: number): Promise<boolean> {
     try {
-      await this.user_repo.destroy({ where: { email } });
+      await this.user_repo.destroy({ where: { id } });
       return true;
     } catch (error) {
       throw new Error(error);
