@@ -36,6 +36,7 @@ export const PersonalDataComponent = () => {
       email: email,
     };
     dispatch(updatePublicUser(data));
+    dispatch(getPublicUser());
   };
 
   return (

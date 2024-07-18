@@ -24,6 +24,7 @@ import { createWatchListRecord } from '../../core/store/crypto/crypto.actions';
 export const SingleAssetPage: React.FC = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState<AlertColor>('success');
+  const [error, setError] = useState(false);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -53,12 +54,14 @@ export const SingleAssetPage: React.FC = (): JSX.Element => {
       }
 
       dispatch(createWatchListRecord(data));
+      setError(false);
       setSeverity('success');
       setOpen(true);
       setTimeout(() => {
         setOpen(false);
       }, 3000);
     } catch (error) {
+      setError(true);
       setSeverity('error');
       setOpen(true);
       setTimeout(() => {
@@ -272,7 +275,9 @@ export const SingleAssetPage: React.FC = (): JSX.Element => {
           </Grid>
           <Snackbar open={open} autoHideDuration={6000}>
             <Alert severity={severity} variant='filled' sx={{ width: '100%' }}>
-              Currency added to favorite!
+              {!error
+                ? ' Currency added to favorite!'
+                : 'Oops, something went wrong!'}
             </Alert>
           </Snackbar>
         </Grid>

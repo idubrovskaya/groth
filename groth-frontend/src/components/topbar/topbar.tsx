@@ -11,13 +11,17 @@ import { tokens } from '../../assets/theme';
 import { ITopbarProps } from '../../core/types/topbar';
 import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
 import { SearchBar } from '../search-bar/search-bar';
+import { useAppSelector } from '../../core/store/auth/auth.selector';
 
 export const TopBarComponent: React.FC<ITopbarProps> = (
   props: ITopbarProps
 ): JSX.Element => {
-  const { isOpen, setIsOpen, matches } = props;
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const { isOpen, setIsOpen, matches } = props;
+
+  const { user } = useAppSelector((state) => state.auth.user);
 
   return (
     <AppBar
@@ -44,7 +48,7 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
                 onClick={() => setIsOpen(!isOpen)}
               />
               <Typography variant='h3'>
-                Welcome, {localStorage.getItem('firstName')}
+                Welcome, {user ? user.firstName : ''}
               </Typography>{' '}
             </Box>
           </Grid>

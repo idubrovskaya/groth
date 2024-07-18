@@ -1,13 +1,22 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from '../sidebar/sidebar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TopBarComponent } from '../topbar/topbar';
+import { useAppDispatch } from '../../core/store/store';
+import { getPublicUser } from '../../core/store/auth/auth.actions';
 
 export const LayoutComponent: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:760px)');
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getPublicUser());
+  }, [dispatch]);
+
   return location.pathname === '/sign-in' ||
     location.pathname === '/sign-up' ? (
     <>
