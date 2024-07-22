@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getNews } from '../../core/store/news/news.actions';
 import { useAppDispatch } from '../../core/store/store';
 import { useAppSelector } from '../../core/store/auth/auth.selector';
@@ -9,15 +9,47 @@ export const NewsPage: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [newsItem, setNewsItem] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
+
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);
-  console.log(news);
 
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch]);
 
-  const renderNewsBlock = news.map((element: any) => (
+  useEffect(() => {
+    setNewsItem(news.slice(0, 10));
+  }, [news]);
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [newsItem, page]);
+
+  const handleScroll = (event: any) => {
+    if (
+      event.target.documentElement.scrollHeight -
+        (event.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      loadMoreNews();
+    }
+  };
+
+  const loadMoreNews = () => {
+    const nextPage = page + 1;
+    const newItems = news.slice(page * 10, nextPage * 10);
+    if (newItems.length > 0) {
+      setNewsItem((prevNewsItem) => [...prevNewsItem, ...newItems]);
+      setPage(nextPage);
+    }
+  };
+
+  const renderNewsBlock = newsItem.map((element: any) => (
     <Grid
       container
       key={element.id}
