@@ -32,7 +32,7 @@ export interface IWatchList {
 export interface IPublicUser {
   id: number | null;
   firstName: string;
-  username: string;
+  userName: string;
   email: string;
   createdAt: string;
   updatedAt: string;
@@ -40,7 +40,10 @@ export interface IPublicUser {
 }
 
 export interface IAuthState {
-  user: any;
+  user: {
+    user: IPublicUser;
+    token: string;
+  };
   isLogged: boolean;
   isLoading: boolean;
 }

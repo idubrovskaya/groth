@@ -35,6 +35,12 @@ export const Sidebar: React.FC<ISidebarProps> = (
     setIsActive(pathname);
   }, [pathname]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('accessToken');
+    navigate('sign-in');
+  };
+
   return (
     <Box component='nav'>
       {isOpen && (
@@ -154,6 +160,7 @@ export const Sidebar: React.FC<ISidebarProps> = (
               )}
               <ListItem>
                 <ListItemButton
+                  onClick={handleLogout}
                   sx={{
                     '&:hover': {
                       backgroundColor: '#1900d5 !important',
