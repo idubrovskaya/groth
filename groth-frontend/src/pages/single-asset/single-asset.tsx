@@ -192,7 +192,7 @@ export const SingleAssetPage: React.FC = (): JSX.Element => {
                 variant='h2'
                 sx={{ fontSize: 20 }}
                 className={
-                  asset.current_price >= 0
+                  asset.price_change_24h >= 0
                     ? `${styles.trendUp}`
                     : ` ${styles.trendDown}`
                 }
@@ -237,7 +237,7 @@ export const SingleAssetPage: React.FC = (): JSX.Element => {
                 variant='h2'
                 sx={{ fontSize: 20 }}
                 className={
-                  asset.current_price >= 0
+                  asset.price_change_percentage_24h >= 0
                     ? `${styles.trendUp}`
                     : ` ${styles.trendDown}`
                 }

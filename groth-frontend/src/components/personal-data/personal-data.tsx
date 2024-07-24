@@ -18,7 +18,6 @@ export const PersonalDataComponent: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
 
   const { user } = useAppSelector((state) => state.auth.user);
-  console.log(user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

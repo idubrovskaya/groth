@@ -21,7 +21,6 @@ export const SignInPage: React.FC<IPropsSignIn> = (
           fullWidth
           error={!!errors.email}
           helperText={errors.email ? `${errors.email.message}` : ''}
-          // required
           autoFocus
           label='Email'
           variant='outlined'
@@ -30,7 +29,6 @@ export const SignInPage: React.FC<IPropsSignIn> = (
         />
         <TextField
           margin='normal'
-          // required
           fullWidth
           error={!!errors.password}
           helperText={errors.password ? `${errors.password.message}` : ''}

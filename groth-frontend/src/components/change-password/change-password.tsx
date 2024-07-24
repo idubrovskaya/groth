@@ -56,16 +56,16 @@ export const ChangePasswordComponent: React.FC = (): JSX.Element => {
         <TextField
           label='Old password'
           variant='outlined'
-          type='text'
-          sx={{ width: '25%', marginBottom: '15px !important' }}
+          type='password'
+          sx={{ width: '35%', marginBottom: '15px !important' }}
           value={oldPassword}
           onChange={(event) => setOldPassword(event.target.value)}
         />
         <TextField
           label='New password'
           variant='outlined'
-          type='text'
-          sx={{ width: '25%', marginBottom: '15px !important' }}
+          type='password'
+          sx={{ width: '35%', marginBottom: '15px !important' }}
           value={newPassword}
           onChange={(event) => setNewPassword(event.target.value)}
         />

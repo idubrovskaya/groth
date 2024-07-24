@@ -54,6 +54,8 @@ export const NewsPage: React.FC = (): JSX.Element => {
       container
       key={element.id}
       sx={{
+        display: 'flex',
+        justifyContent: 'center',
         padding: '20px 16px',
         marginBottom: '32px',
         minHeight: '180px',
@@ -72,10 +74,10 @@ export const NewsPage: React.FC = (): JSX.Element => {
         },
       }}
     >
-      <Grid item xs={12} md={3}>
+      <Grid item xs={3} md={3} lg={3} sx={{ minWidth: '300px' }}>
         <img src={element.imageurl} alt={element.category} />
       </Grid>
-      <Grid item xs={12} md={9}>
+      <Grid item xs={9} md={9} lg={9}>
         <Box sx={{ marginBottom: '32px' }}>
           <Typography variant='h3'>{element.title}</Typography>
         </Box>
@@ -85,9 +87,16 @@ export const NewsPage: React.FC = (): JSX.Element => {
         </Box>
       </Grid>
 
-      <Grid item xs={12} md={12} sx={{ textAlign: 'center' }}>
+      <Grid
+        item
+        xs={12}
+        md={12}
+        sx={{ textAlign: 'center', marginTop: '20px' }}
+      >
         <Typography variant='h4'>
-          <Link href={element.url}>Read more</Link>
+          <Link href={element.url} sx={{ color: colors.blue }}>
+            Read more
+          </Link>
         </Typography>
       </Grid>
     </Grid>

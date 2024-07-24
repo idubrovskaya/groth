@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../core/store/store';
 import { getPublicUser } from '../../core/store/auth/auth.actions';
 
 export const LayoutComponent: React.FC = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:760px)');
 

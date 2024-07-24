@@ -7,7 +7,7 @@ import { AssetsTableComponent } from '../../components/assetsTable/assetsTable';
 import { Grid, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../assets/theme';
 
-export const WatchListPage:React.FC = ():JSX.Element => {
+export const WatchListPage: React.FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -20,7 +20,6 @@ export const WatchListPage:React.FC = ():JSX.Element => {
       return otherElement.assetId === element.id;
     });
   });
-  console.log(filteredArray);
 
   useEffect(() => {
     dispatch(getTopPriceData());

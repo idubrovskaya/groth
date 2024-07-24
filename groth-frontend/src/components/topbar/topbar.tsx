@@ -35,7 +35,7 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
     >
       <Toolbar sx={{ justifyContent: 'space-between', p: '25px 45px' }}>
         <Grid container justifyContent={'space-between'} alignItems={'center'}>
-          <Grid item sm={3} lg={3}>
+          <Grid item sm={4} lg={4}>
             <Box
               sx={{
                 display: 'flex',
@@ -55,8 +55,8 @@ export const TopBarComponent: React.FC<ITopbarProps> = (
           {matches && (
             <Grid
               item
-              sm={9}
-              lg={9}
+              sm={8}
+              lg={8}
               display={'flex'}
               justifyContent={'flex-end'}
             >

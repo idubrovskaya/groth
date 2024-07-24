@@ -47,7 +47,6 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
             password: data.password,
           };
           await dispatch(signUp(userData));
-          console.log(userData, 'dannye');
 
           navigate('/');
         } catch (error) {
