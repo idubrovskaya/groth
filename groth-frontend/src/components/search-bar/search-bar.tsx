@@ -2,7 +2,7 @@ import { Stack, Autocomplete, TextField } from '@mui/material';
 import { useAppSelector } from '../../core/store/auth/auth.selector';
 import { ISingleAsset } from '../../core/types/assets';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -11,20 +11,33 @@ export const SearchBar = () => {
   const assetsArray: ISingleAsset[] = useAppSelector(
     (state) => state.crypto.assets
   );
+
+  const handleChange = useCallback(
+    (event: any, value: string | null) => {
+      if (value) {
+        navigate(`single/${value}`);
+      }
+      setSelectedItem(value);
+    },
+    [navigate]
+  );
+
+  const handleInputChange = useCallback(
+    (event: any, value: string) => {
+      if (value === '') {
+        navigate('/');
+      }
+      setSelectedItem(value);
+    },
+    [navigate]
+  );
+
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
-        onChange={(event: any, value: string | null) => {
-          navigate(`single/${value}`);
-          setSelectedItem(null);
-        }}
-        renderInput={(element) => (
-          <TextField
-            {...element}
-            label='Search'
-            InputProps={{ ...element.InputProps, type: 'search' }}
-          />
-        )}
+        onChange={handleChange}
+        onInputChange={handleInputChange}
+        renderInput={(element) => <TextField {...element} label='Search' />}
         options={assetsArray.map((element: { name: string }) => element.name)}
       />
     </Stack>

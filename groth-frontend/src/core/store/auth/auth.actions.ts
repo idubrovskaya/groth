@@ -62,7 +62,6 @@ export const updatePublicUser = createAsyncThunk(
   async (data: any, { rejectWithValue }) => {
     try {
       const user = await instance.patch('users', data);
-      console.log(user.data);
       return user.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {

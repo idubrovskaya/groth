@@ -142,7 +142,7 @@ export const Home: React.FC = (): JSX.Element => {
               : colors.primary[600]
           }`,
           padding: '20px 16px',
-          marginBottom: 32,
+          marginBottom: '32px',
           minHeight: 270,
           border: `1px solid ${colors.borderColor}`,
           borderRadius: 12,

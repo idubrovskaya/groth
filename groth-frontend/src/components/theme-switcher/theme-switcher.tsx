@@ -1,8 +1,4 @@
-import {
-  DarkMode,
-  LightMode,
-  NotificationsNoneOutlined,
-} from '@mui/icons-material';
+import { DarkMode, LightMode } from '@mui/icons-material';
 import { Grid, IconButton, useTheme } from '@mui/material';
 import { useContext } from 'react';
 import { ColorModeContext } from '../../assets/theme';
@@ -19,11 +15,8 @@ export const ThemeSwitcher: React.FC = (): JSX.Element => {
       }}
       onClick={colorMode.toggleColorMode}
     >
-      <IconButton sx={{ ml: '45px' }}>
+      <IconButton sx={{ ml: '5px' }}>
         {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
-      </IconButton>
-      <IconButton>
-        <NotificationsNoneOutlined />
       </IconButton>
     </Grid>
   );
